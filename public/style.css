@@ -19,3 +19,36 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+#home-nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+.recipes-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 2rem;
+}
+
+.recipes-list > * {
+  margin: 1rem;
+  padding: 0.5rem;
+  width: 250px;
+}
+
+.recipe {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  box-shadow: 0px 1px 1px 0;
+}
+
+.recipe p {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
