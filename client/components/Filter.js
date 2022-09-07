@@ -10,6 +10,7 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import Recipes from "./Recipes";
+import _ from "lodash";
 
 const dietTypes = [
   "balanced",
@@ -84,9 +85,94 @@ const Filter = ({ recipes }) => {
     }
   }
 
+  const dietFilter = recipes.filter((recipe) => {
+    const dietLabels = recipe.recipe.dietLabels;
+    const dietCount = dietLabels.reduce((acc, dietLabel) => {
+      if (diet.includes(dietLabel.toLowerCase())) acc++;
+      return acc;
+    }, 0);
+    if (dietCount) {
+      return recipe;
+    }
+  });
+
+  const allergyFilter = recipes.filter((recipe) => {
+    const healthLabels = recipe.recipe.healthLabels;
+    const allergyCount = healthLabels.reduce((acc, healthLabel) => {
+      if (allergy.includes(healthLabel.toLowerCase())) acc++;
+      return acc;
+    }, 0);
+    if (allergyCount) {
+      return recipe;
+    }
+  });
+
+  const cuisineFilter = recipes.filter((recipe) => {
+    const cuisineTypes = recipe.recipe.cuisineType;
+    const cuisineCount = cuisineTypes.reduce((acc, cuisineType) => {
+      if (cuisine.includes(cuisineType.toLowerCase())) acc++;
+      return acc;
+    }, 0);
+    if (cuisineCount) {
+      return recipe;
+    }
+  });
+
+  const mealFilter = recipes.filter((recipe) => {
+    const mealTypes = recipe.recipe.mealType;
+    const mealCount = mealTypes.reduce((acc, mealType) => {
+      if (meal.includes(mealType.toLowerCase())) acc++;
+      return acc;
+    }, 0);
+    if (mealCount) {
+      return recipe;
+    }
+  });
+
+  const dishFilter = recipes.filter((recipe) => {
+    const dishTypes = recipe.recipe.dishType || [];
+    const dishCount = dishTypes.reduce((acc, dishType) => {
+      if (dish.includes(dishType.toLowerCase())) acc++;
+      return acc;
+    }, 0);
+    if (dishCount) {
+      return recipe;
+    }
+  });
+
+  const dietFiltered = recipes.filter((recipe) => {
+    if (dietFilter.length) {
+      return dietFilter.includes(recipe);
+    } else {
+      return recipe;
+    }
+  });
+
+  const cuisineFiltered = dietFiltered.filter((recipe) => {
+    if (cuisineFilter.length) {
+      return cuisineFilter.includes(recipe);
+    } else return recipe;
+  });
+  const allergyFiltered = cuisineFiltered.filter((recipe) => {
+    if (allergyFilter.length) {
+      return allergyFilter.includes(recipe);
+    } else return recipe;
+  });
+  const mealFiltered = allergyFiltered.filter((recipe) => {
+    if (mealFilter.length) {
+      return mealFilter.includes(recipe);
+    } else return recipe;
+  });
+  const dishFiltered = mealFiltered.filter((recipe) => {
+    if (dishFilter.length) {
+      return dishFilter.includes(recipe);
+    } else return recipe;
+  });
+  console.log(dishFiltered);
+
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 200, height: 5 }}>
+      <FormControl sx={{ m: 1, width: 200 }}>
         <InputLabel>Diet</InputLabel>
         <Select
           multiple
@@ -181,6 +267,11 @@ const Filter = ({ recipes }) => {
           ))}
         </Select>
       </FormControl>
+      {dishFiltered.length === 0 ? (
+        <h2>No Recipes Found!</h2>
+      ) : (
+        <Recipes recipes={dishFiltered} />
+      )}
     </div>
   );
 };

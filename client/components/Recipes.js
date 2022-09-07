@@ -1,8 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import Search from "./Search";
 
 const Recipes = ({ recipes }) => {
   return (
@@ -10,7 +8,10 @@ const Recipes = ({ recipes }) => {
       {recipes.map((recipe) => {
         return (
           <Link
-            to={`/recipes/${recipe.recipe.uri}`}
+            to={{
+              pathname: `/recipes/${recipe.recipe.label}`,
+              state: recipe.recipe,
+            }}
             key={recipe.recipe.uri}
             className="recipe"
           >

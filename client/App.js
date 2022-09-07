@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import Navbar from "./components/Navbar";
 import Routes from "./Routes";
-import HomeNav from "./components/HomeNav";
-import Recipes from "./components/Recipes";
 import Search from "./components/Search";
 
 class App extends Component {
@@ -30,13 +28,10 @@ class App extends Component {
     this.fetchRecipes();
   }
   render() {
-    const { recipes } = this.state;
     return (
       <div>
         <Navbar />
-        <Routes />
-        <Search recipes={recipes} />
-        <Recipes recipes={recipes} />
+        <Routes recipes={this.state.recipes} />
       </div>
     );
   }

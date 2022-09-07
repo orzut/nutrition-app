@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  margin: 3rem;
 }
 
 a {
@@ -51,4 +52,30 @@ form div {
 
 h2 {
   text-align: center;
+}
+
+#recipe-page {
+  display: flex;
+  margin-top: 3rem;
+}
+
+image {
+  flex: 1;
+}
+
+#header {
+  display: flex;
+  justify-content: space-around;
+  flex: 3;
+  font-weight: bold;
+  color: rgb(46, 39, 191);
+  font-size: large;
+}
+
+#details {
+  margin-left: 2rem;
+}
+
+h1 a {
+  color: black;
 }
