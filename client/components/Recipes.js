@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Recipes = ({ recipes }) => {
@@ -24,4 +23,4 @@ const Recipes = ({ recipes }) => {
   );
 };
 
-export default connect()(Recipes);
+export default Recipes;

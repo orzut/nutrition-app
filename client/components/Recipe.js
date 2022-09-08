@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import {
   Table,
   TableBody,
@@ -12,9 +11,8 @@ const Recipe = ({ location }) => {
   const recipe = location.state;
   const servingCal = Math.round(recipe.calories / recipe.yield);
   const dailyVal = Math.round(2000 / servingCal);
-  console.log(recipe);
   return (
-    <div>
+    <div id="img-margin">
       <h2>{recipe.label}</h2>
       <div id="recipe-page">
         <div id="image">
@@ -180,4 +178,4 @@ const Recipe = ({ location }) => {
   );
 };
 
-export default connect()(Recipe);
+export default Recipe;

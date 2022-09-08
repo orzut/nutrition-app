@@ -2,13 +2,37 @@ import React, { Component } from "react";
 import axios from "axios";
 import Navbar from "./components/Navbar";
 import Routes from "./Routes";
-import Search from "./components/Search";
+
+const mealPlans = [
+  {
+    id: 1,
+    name: "Get Fit",
+    image: "images/foods_to_eat_to_lose_weight.jpeg",
+    description:
+      "Get fit with balanced meals that are rich of healthy nutrients for your body",
+  },
+  {
+    id: 2,
+    name: "Gain Muscle",
+    image: "images/main-qimg-507a0664289756d2c386a0140d8ff58b-lq.jpeg",
+    description: "Gain muscles with high-protein based meals",
+  },
+  {
+    id: 3,
+    name: "Lose Weight",
+    image:
+      "images/selection-of-food-that-is-good-for-the-heart-royalty-free-image-509858326-1543262808.jpeg",
+    description:
+      "Lose weight with low-carb balanced meals that will still keep you full",
+  },
+];
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       recipes: [],
+      mealPlans: [],
     };
     this.fetchRecipes = this.fetchRecipes.bind(this);
   }
@@ -26,12 +50,13 @@ class App extends Component {
 
   componentDidMount() {
     this.fetchRecipes();
+    this.setState({ mealPlans: mealPlans });
   }
   render() {
     return (
       <div>
         <Navbar />
-        <Routes recipes={this.state.recipes} />
+        <Routes recipes={this.state.recipes} mealPlans={this.state.mealPlans} />
       </div>
     );
   }

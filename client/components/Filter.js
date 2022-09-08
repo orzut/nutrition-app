@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import {
   FormControl,
   InputLabel,
@@ -8,7 +7,12 @@ import {
   Checkbox,
   ListItemText,
   OutlinedInput,
+  IconButton,
+  InputBase,
+  Paper,
 } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+
 import Recipes from "./Recipes";
 import _ from "lodash";
 
@@ -67,6 +71,7 @@ const Filter = ({ recipes }) => {
   const [cuisine, setCuisine] = useState([]);
   const [meal, setMeal] = useState([]);
   const [dish, setDish] = useState([]);
+  const [searchField, setSearchField] = useState("");
 
   function onChange(ev) {
     const name = ev.target.name;
@@ -82,8 +87,14 @@ const Filter = ({ recipes }) => {
       setMeal(value);
     } else if (name === "dish") {
       setDish(value);
+    } else if (name === "search") {
+      setSearchField(value);
     }
   }
+
+  const searchFilter = recipes.filter((recipe) =>
+    recipe.recipe.label.toLowerCase().includes(searchField.toLowerCase())
+  );
 
   const dietFilter = recipes.filter((recipe) => {
     const dietLabels = recipe.recipe.dietLabels;
@@ -168,10 +179,34 @@ const Filter = ({ recipes }) => {
       return dishFilter.includes(recipe);
     } else return recipe;
   });
-  console.log(dishFiltered);
+
+  const allFilters = dishFiltered.filter((recipe) =>
+    recipe.recipe.label.toLowerCase().includes(searchField.toLowerCase())
+  );
 
   return (
-    <div>
+    <div id="img-margin">
+      <Paper
+        sx={{
+          p: "2px 4px",
+          display: "flex",
+          alignItems: "center",
+          width: 400,
+          m: "auto",
+          mb: 3,
+        }}
+      >
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          placeholder="Search Recipes"
+          name="search"
+          onChange={onChange}
+          value={searchField}
+        />
+        <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+          <SearchIcon />
+        </IconButton>
+      </Paper>
       <FormControl sx={{ m: 1, width: 200 }}>
         <InputLabel>Diet</InputLabel>
         <Select
@@ -267,13 +302,13 @@ const Filter = ({ recipes }) => {
           ))}
         </Select>
       </FormControl>
-      {dishFiltered.length === 0 ? (
-        <h2>No Recipes Found!</h2>
+      {allFilters.length === 0 ? (
+        <Recipes recipes={recipes} />
       ) : (
-        <Recipes recipes={dishFiltered} />
+        <Recipes recipes={allFilters} />
       )}
     </div>
   );
 };
 
-export default connect()(Filter);
+export default Filter;

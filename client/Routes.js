@@ -4,7 +4,8 @@ import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import Recipe from "./components/Recipe";
-import Search from "./components/Search";
+import Filter from "./components/Filter";
+import MealPlan from "./components/MealPlan";
 
 import { me } from "./store";
 
@@ -17,13 +18,25 @@ class Routes extends Component {
   }
 
   render() {
-    const { isLoggedIn, recipes } = this.props;
+    const { isLoggedIn, recipes, mealPlans } = this.props;
     return (
       <div>
+        <Switch>
+          <Route path="/" exact>
+            <Filter recipes={recipes} />
+          </Route>
+          <Route path="/recipes/:recipeLabel" component={Recipe} />
+        </Switch>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={Home} />
-            <Redirect to="/home" />
+            {/* <Redirect to="/home" /> */}
+            <Route path="/home" exact>
+              <Home mealPlans={mealPlans} />
+            </Route>
+            <Route
+              path="/mealPlans/:id"
+              render={(props) => <MealPlan {...props} recipes={recipes} />}
+            />
           </Switch>
         ) : (
           <Switch>
@@ -32,12 +45,6 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
           </Switch>
         )}
-        <Switch>
-          <Route path="/" exact>
-            <Search recipes={recipes} />
-          </Route>
-          <Route path="/recipes/:recipeLabel" component={Recipe} />
-        </Switch>
       </div>
     );
   }

@@ -1,6 +1,15 @@
 body {
-  font-family: sans-serif;
+  font-family: "Optima";
   margin: 3rem;
+  margin-top: 1rem;
+  background-image: url("images/9f52kt-Nutrition\ Home\ page\ banner--homepagebanner.jpeg");
+  background-position: top;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#img-margin {
+  margin-top: 15rem;
 }
 
 a {
@@ -14,16 +23,12 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  color: black;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
-}
-
-#home-nav {
-  display: flex;
-  justify-content: space-around;
 }
 
 .recipes-list {
@@ -77,5 +82,68 @@ image {
 }
 
 h1 a {
-  color: black;
+  color: white;
+}
+
+h1 {
+  flex: 2;
+  text-align: end;
+  font-size: 50px;
+  /* font-family: fantasy; */
+}
+
+.navbar {
+  display: flex;
+}
+
+.navbar nav {
+  flex: 3;
+  display: flex;
+  justify-content: end;
+}
+
+.meal-plans {
+  display: flex;
+  justify-content: space-around;
+}
+
+.meal-plans > * {
+  margin: 1rem;
+  width: calc(100% / 3 - 2rem);
+}
+
+.meal-plan-recipes {
+  display: flex;
+}
+
+li {
+  list-style-type: none;
+}
+
+.single-recipe {
+  display: flex;
+}
+
+.single-recipe img {
+  margin: 1rem;
+  height: 10rem;
+  border-radius: 50%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.days {
+  display: flex;
+  flex-direction: column;
+}
+
+.days li {
+  height: 10rem;
+  margin: 1rem;
+  font-weight: bold;
 }
