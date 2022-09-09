@@ -207,7 +207,7 @@ const Filter = ({ recipes }) => {
           <SearchIcon />
         </IconButton>
       </Paper>
-      <FormControl sx={{ m: 1, width: 200 }}>
+      <FormControl sx={{ m: 1, width: 230 }}>
         <InputLabel>Diet</InputLabel>
         <Select
           multiple
@@ -226,7 +226,7 @@ const Filter = ({ recipes }) => {
           ))}
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 1, width: 200 }}>
+      <FormControl sx={{ m: 1, width: 230 }}>
         <InputLabel>Allergies</InputLabel>
         <Select
           multiple
@@ -245,7 +245,7 @@ const Filter = ({ recipes }) => {
           ))}
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 1, width: 200 }}>
+      <FormControl sx={{ m: 1, width: 230 }}>
         <InputLabel>Cuisine</InputLabel>
         <Select
           multiple
@@ -264,7 +264,7 @@ const Filter = ({ recipes }) => {
           ))}
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 1, width: 200 }}>
+      <FormControl sx={{ m: 1, width: 230 }}>
         <InputLabel>Meal</InputLabel>
         <Select
           multiple
@@ -283,7 +283,7 @@ const Filter = ({ recipes }) => {
           ))}
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 1, width: 250 }}>
+      <FormControl sx={{ m: 1, width: 230 }}>
         <InputLabel>Dish</InputLabel>
         <Select
           multiple

@@ -6,32 +6,34 @@ export const RecipesList = ({ mealType }) => {
     <ul>
       {mealType.map((recipe) => {
         return (
-          <li key={recipe.recipe.label} className="single-recipe">
-            <Link
-              to={{
-                pathname: `/recipes/${recipe.recipe.label}`,
-                state: recipe.recipe,
-              }}
-            >
-              <img src={recipe.recipe.image}></img>
-            </Link>
-            <div>
-              <p>Calories: {Math.round(recipe.recipe.calories)}</p>
-              <p>
-                Protein:{" "}
-                {Math.round(recipe.recipe.totalNutrients.PROCNT.quantity)}{" "}
-                {recipe.recipe.totalNutrients.PROCNT.unit}
-              </p>
-              <p>
-                Fat: {Math.round(recipe.recipe.totalNutrients.FAT.quantity)}{" "}
-                {recipe.recipe.totalNutrients.FAT.unit}
-              </p>
-              <p>
-                Carbs:{" "}
-                {Math.round(recipe.recipe.totalNutrients.CHOCDF.quantity)}{" "}
-                {recipe.recipe.totalNutrients.CHOCDF.unit}
-              </p>
-              <hr />
+          <li key={recipe.recipe.label} id="recipe">
+            <p>{recipe.recipe.label}</p>
+            <div className="single-recipe">
+              <Link
+                to={{
+                  pathname: `/recipes/${recipe.recipe.label}`,
+                  state: recipe.recipe,
+                }}
+              >
+                <img src={recipe.recipe.image}></img>
+              </Link>
+              <div>
+                <p>Calories: {Math.round(recipe.recipe.calories)}</p>
+                <p>
+                  Protein:{" "}
+                  {Math.round(recipe.recipe.totalNutrients.PROCNT.quantity)}{" "}
+                  {recipe.recipe.totalNutrients.PROCNT.unit}
+                </p>
+                <p>
+                  Fat: {Math.round(recipe.recipe.totalNutrients.FAT.quantity)}{" "}
+                  {recipe.recipe.totalNutrients.FAT.unit}
+                </p>
+                <p>
+                  Carbs:{" "}
+                  {Math.round(recipe.recipe.totalNutrients.CHOCDF.quantity)}{" "}
+                  {recipe.recipe.totalNutrients.CHOCDF.unit}
+                </p>
+              </div>
             </div>
           </li>
         );
@@ -42,11 +44,13 @@ export const RecipesList = ({ mealType }) => {
 
 const MealPlan = ({ recipes, location }) => {
   const mealPlan = location.state;
-  const getFitRecipes = recipes.filter((recipe) =>
-    recipe.recipe.dietLabels.includes("Balanced")
+  const getFitRecipes = recipes.filter(
+    (recipe) =>
+      recipe.recipe.dietLabels.includes("Balanced") ||
+      recipe.recipe.healthLabels.includes("Mediterranean")
   );
   const gainMuscleRecipes = recipes.filter(
-    (recipe) => recipe.recipe.totalDaily.PROCNT.quantity > 40
+    (recipe) => recipe.recipe.totalDaily.PROCNT.quantity > 30
   );
   const loseWeightRecipes = recipes.filter(
     (recipe) => recipe.recipe.totalDaily.CHOCDF.quantity < 10
@@ -71,7 +75,7 @@ const MealPlan = ({ recipes, location }) => {
         recipe.recipe.mealType.includes("snack")
     )
     .slice(0, 7);
-  console.log(breakfast);
+  console.log(gainMuscleRecipes);
   const lunchDinner = mealPlanRecipes
     .filter((recipe) => recipe.recipe.mealType.includes("lunch/dinner"))
     .slice(0, 14);
@@ -91,7 +95,7 @@ const MealPlan = ({ recipes, location }) => {
         </ul>
         <RecipesList mealType={breakfast} />
         <RecipesList mealType={lunchDinner.slice(0, 7)} />
-        <RecipesList mealType={lunchDinner.slice(7)} />
+        <RecipesList mealType={lunchDinner.slice(7, 14)} />
       </div>
     </div>
   );

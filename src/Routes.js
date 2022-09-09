@@ -29,14 +29,15 @@ class Routes extends Component {
         </Switch>
         {isLoggedIn ? (
           <Switch>
-            {/* <Redirect to="/home" /> */}
             <Route path="/home" exact>
               <Home mealPlans={mealPlans} />
             </Route>
+
             <Route
               path="/mealPlans/:id"
               render={(props) => <MealPlan {...props} recipes={recipes} />}
             />
+            {/* <Redirect to="/home" /> */}
           </Switch>
         ) : (
           <Switch>

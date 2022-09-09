@@ -17,7 +17,7 @@ export const Home = (props) => {
   return (
     <div id="img-margin">
       <h3>Welcome, {username}</h3>
-      <h2>Choose your health goal</h2>
+      <h2>Choose your weekly health goal</h2>
       <div className="meal-plans">
         {mealPlans.map((mealPlan) => {
           return (
