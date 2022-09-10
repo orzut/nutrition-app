@@ -180,12 +180,14 @@ const Filter = ({ recipes }) => {
     } else return recipe;
   });
 
-  const allFilters = dishFiltered.filter((recipe) =>
+  let allFilters = dishFiltered.filter((recipe) =>
     recipe.recipe.label.toLowerCase().includes(searchField.toLowerCase())
   );
 
   return (
     <div id="img-margin">
+      <div id="edamam-badge" data-color="white"></div>
+
       <Paper
         sx={{
           p: "2px 4px",
@@ -302,11 +304,8 @@ const Filter = ({ recipes }) => {
           ))}
         </Select>
       </FormControl>
-      {allFilters.length === 0 ? (
-        <Recipes recipes={recipes} />
-      ) : (
-        <Recipes recipes={allFilters} />
-      )}
+      {/* <button onClick={() => (allFilters = recipes)}>Clear all filters</button> */}
+      <Recipes recipes={allFilters} />
     </div>
   );
 };

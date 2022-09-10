@@ -7,7 +7,6 @@ import {
   TableRow,
   Collapse,
   IconButton,
-  Typography,
 } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -27,7 +26,6 @@ const Recipe = ({ location }) => {
     label: recipe.totalDaily.FIBTG.label,
     y: Math.round(recipe.totalDaily.FIBTG.quantity),
   };
-
   const data = recipe.digest
     .filter(
       (nutrient) =>
@@ -39,7 +37,7 @@ const Recipe = ({ location }) => {
       return { label: nutrient.label, y: Math.round(nutrient.daily) };
     })
     .concat(fiber);
-
+  console.log(data);
   const options = {
     title: {
       text: "Daily Value (%)",
@@ -58,7 +56,7 @@ const Recipe = ({ location }) => {
     },
     data: [
       {
-        type: "stackedBar100",
+        type: "bar",
         color: "#027505",
         name: "Nutrients",
         showInLegend: true,
@@ -66,19 +64,6 @@ const Recipe = ({ location }) => {
         indexLabelFontColor: "white",
         yValueFormatString: "#,###'%'",
         dataPoints: data,
-      },
-      {
-        type: "stackedBar100",
-        color: "#DFDFDF",
-        name: "Total",
-        indexLabel: "{y}",
-        yValueFormatString: "#,###'%'",
-        dataPoints: [
-          { label: "Fat", y: 100 - data[0].y },
-          { label: "Carbs", y: 100 - data[1].y },
-          { label: "Protein", y: 100 - data[2].y },
-          { label: "Fiber", y: 100 - data[3].y },
-        ],
       },
     ],
   };

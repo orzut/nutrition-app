@@ -13,10 +13,9 @@ import {
  */
 
 export const Home = (props) => {
-  const { username, mealPlans } = props;
+  const { mealPlans } = props;
   return (
     <div id="img-margin">
-      <h3>Welcome, {username}</h3>
       <h2>Choose your weekly health goal</h2>
       <div className="meal-plans">
         {mealPlans.map((mealPlan) => {

@@ -89,7 +89,13 @@ h1 {
   flex: 2;
   text-align: end;
   font-size: 50px;
+  margin-top: 0.5rem;
 }
+
+/* #edamam-badge {
+  flex: 2;
+  text-align: end;
+} */
 
 .navbar {
   display: flex;

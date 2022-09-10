@@ -26,26 +26,14 @@ class Routes extends Component {
             <Filter recipes={recipes} />
           </Route>
           <Route path="/recipes/:recipeLabel" component={Recipe} />
+          <Route
+            path="/mealPlans/:id"
+            render={(props) => <MealPlan {...props} recipes={recipes} />}
+          />
+          <Route path="/mealPlans" exact>
+            <Home mealPlans={mealPlans} />
+          </Route>
         </Switch>
-        {isLoggedIn ? (
-          <Switch>
-            <Route path="/home" exact>
-              <Home mealPlans={mealPlans} />
-            </Route>
-
-            <Route
-              path="/mealPlans/:id"
-              render={(props) => <MealPlan {...props} recipes={recipes} />}
-            />
-            {/* <Redirect to="/home" /> */}
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path="/" exact component={Login} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-          </Switch>
-        )}
       </div>
     );
   }
